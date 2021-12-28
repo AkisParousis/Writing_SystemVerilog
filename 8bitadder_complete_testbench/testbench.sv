@@ -73,7 +73,7 @@ class monitor;
     forever begin
       t.a = vif.a;
       t.b = vif.b;
-      t.y = vif.y;
+      t.sum = vif.sum;
       mbx.put(t);
       $display("[MON] : Data sent to Scoreboard");
       #10;
@@ -95,7 +95,7 @@ class scoreboard;
     forever begin
       mbx.get(t);
       temp = t.a + t.b;
-      if(t.y == temp)
+      if(t.sum == temp)
         begin
           $display("[SCO] : Test Passed");
         end
