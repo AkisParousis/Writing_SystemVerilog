@@ -154,7 +154,7 @@ module tb();
   mailbox monsco;
     
   add_intf vif();
-  add_intf dut(vif.a,vif.b,vif.sum);
+  add dut(vif.a,vif.b,vif.sum);
   
   initial begin
     gendrv = new();
