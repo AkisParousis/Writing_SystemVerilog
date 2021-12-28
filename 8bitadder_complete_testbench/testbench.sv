@@ -33,7 +33,7 @@ interface add_intf();
   logic [8:0] sum;
 endinterface
 
-class driver();
+class driver;
   transaction t;
   mailbox mbx;
   event done;
@@ -57,7 +57,7 @@ class driver();
   endtask
 endclass
 
-class monitor();
+class monitor;
   transaction t;
   mailbox mbx;
   event done;
@@ -73,7 +73,7 @@ class monitor();
     forever begin
       t.a = vif.a;
       t.b = vif.b;
-      t.y = vif.y
+      t.y = vif.y;
       mbx.put(t);
       $display("[MON] : Data sent to Scoreboard");
       #10;
@@ -81,7 +81,7 @@ class monitor();
   endtask
 endclass
       
-class scoreboard();
+class scoreboard;
   transaction t;
   mailbox mbx;
   bit [7:0] temp;
@@ -108,7 +108,7 @@ class scoreboard();
   endtask
 endclass
 
-class environment();
+class environment;
   generator gen;
   driver drv;
   monitor mon;
@@ -117,11 +117,11 @@ class environment();
   mailbox gendrv;
   mailbox monsco;
   
-  virtual andt_intf vif;
+  virtual add_intf vif;
   
   event gendrv_done;
   
-  function new(mailbox gendrvmbx,mailbox monscombx);
+  function new(mailbox gendrv,mailbox monsco);
     this.gendrv = gendrv;
     this.monsco = monsco;
     
@@ -153,8 +153,8 @@ module tb();
   mailbox gendrv;
   mailbox monsco;
     
-  andt_intf vif();
-  andt_intf dut(vif.a,vif.b,vif.sum);
+  add_intf vif();
+  add_intf dut(vif.a,vif.b,vif.sum);
   
   initial begin
     gendrv = new();
