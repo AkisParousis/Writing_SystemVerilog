@@ -152,7 +152,7 @@ module tb();
   mailbox monscombx;
   
   andt_intf vif();
-  andt_intf dut(vif.a,vif.b,vif,y);
+  andt_intf dut(vif.a,vif.b,vif.y);
   
   initial begin
     gendrvmbx = new();
