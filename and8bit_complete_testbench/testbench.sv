@@ -21,6 +21,7 @@ class generator;
       mbx.put(t);
       $display("[GEN] : Data sent to Driver");
       @(done);
+      #10;
     end
   endtask
   
@@ -51,6 +52,7 @@ class driver;
       vif.b = t.b;
       $display("[DRV] : Trigger Interface");
       ->done;
+      #10;
     end
   endtask
 endclass
@@ -72,6 +74,7 @@ class monitor;
       t.y = vif.y;
       mbx.put(t);
       $display("[MON] : Data sent to Scoreboard");
+      #10;
     end
   endtask
 endclass
@@ -98,6 +101,7 @@ class scoreboard;
         begin
           $display("[SCO] : Test Failed");
         end
+      #10;
     end
   endtask
 endclass
