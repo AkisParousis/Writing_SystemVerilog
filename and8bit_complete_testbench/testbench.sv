@@ -54,3 +54,50 @@ class driver;
     end
   endtask
 endclass
+
+class monitor;
+  virtual andt_intf vif;
+  mailbox mbx;
+  transaction t;
+  
+  function new(mailbox mbx);
+    this.mbx = mbx
+  endfunction
+  
+  task run();
+    t = new();
+    forever begin
+      t.a = vif.a;
+      t.b = vif.b;
+      t.y = vif.y;
+      mbx.put(t);
+      $display("[MON] : Data sent to Scoreboard");
+    end
+  endtask
+endclass
+
+class scoreboard;
+  mailbox mbx;
+  transaction t;
+  bit [7:0] temp;
+  
+  function new(mailbox mbx);
+    this.mbx = mbx
+  endfunction
+  
+  task run();
+    t = new();
+    forever begin
+      mbx.get(t);
+      temp = t.a $ t.b;
+      if (t.y == temp)
+        begin
+          $display("[SCO] : Test Passed");
+        end
+      else
+        begin
+          $display("[SCO] : Test Failed");
+        end
+    end
+  endtask
+endclass
