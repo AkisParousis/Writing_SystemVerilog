@@ -92,7 +92,7 @@ class scoreboard;
     t = new();
     forever begin
       mbx.get(t);
-      temp = t.a $ t.b;
+      temp = t.a & t.b;
       if (t.y == temp)
         begin
           $display("[SCO] : Test Passed");
