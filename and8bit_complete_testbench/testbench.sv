@@ -11,7 +11,7 @@ class generator;
   integer i;
   
   function new(mailbox mbx);
-    this.mbx = mbx
+    this.mbx = mbx;
   endfunction
   
   task run();
@@ -41,7 +41,7 @@ class driver;
   virtual andt_intf vif;
   
   function new(mailbox mbx);
-    this.mbx = mbx
+    this.mbx = mbx;
   endfunction
   
   task run();
@@ -63,7 +63,7 @@ class monitor;
   transaction t;
   
   function new(mailbox mbx);
-    this.mbx = mbx
+    this.mbx = mbx;
   endfunction
   
   task run();
@@ -85,7 +85,7 @@ class scoreboard;
   bit [7:0] temp;
   
   function new(mailbox mbx);
-    this.mbx = mbx
+    this.mbx = mbx;
   endfunction
   
   task run();
@@ -162,5 +162,10 @@ module tb();
     env.run();
     #200;
     $finish;
+  end
+  
+  initial begin
+  $dumpvars;
+  $dumpfile("dump.vcd"); 
   end
 endmodule
